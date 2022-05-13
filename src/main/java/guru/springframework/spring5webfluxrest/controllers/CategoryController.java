@@ -41,4 +41,18 @@ public class CategoryController {
         category.setId(id);
         return categoryRepository.save(category);
     }
+    @PatchMapping("/api/v1/categories/{id}")
+    Mono<Category> patchCateogry(@PathVariable String id, @RequestBody Category category) {
+
+        Category foundCategory = categoryRepository.findById(id).block();
+
+        //TODO:: This is just example code so we left this business logic in the controller method.
+        // However, it should be Refactored into the service layer as a best practice.
+        if(foundCategory.getDescription() != category.getDescription()) {
+            foundCategory.setDescription(category.getDescription());
+            return categoryRepository.save(foundCategory);
+        }
+
+        return Mono.just(foundCategory);
+    }
 }
