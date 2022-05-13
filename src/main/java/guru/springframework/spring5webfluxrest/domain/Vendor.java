@@ -3,6 +3,7 @@ package guru.springframework.spring5webfluxrest.domain;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Data
 @Document
@@ -12,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Vendor {
 
     @Id
-    private String Id;
+    private String id;
 
     private String firstName;
     private String lastName;
