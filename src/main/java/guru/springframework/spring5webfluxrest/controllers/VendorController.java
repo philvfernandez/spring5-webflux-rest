@@ -42,4 +42,17 @@ public class VendorController {
         vendor.setId(id);
         return vendorRepository.save(vendor);
     }
+
+    @PatchMapping("/api/v1/vendors/{id}")
+    Mono <Vendor> patchVendor(@PathVariable String id, @RequestBody Vendor vendor) {
+        Vendor foundVendor = vendorRepository.findById(id).block();
+
+        //TODO:: This is just example code so we left this business logic in the controller method.
+        // However, it should be Refactored into the service layer as a best practice.
+        if(!foundVendor.getFirstName().equals(vendor.getFirstName())) {
+            foundVendor.setFirstName(vendor.getFirstName());
+        }
+
+        return Mono.just(foundVendor);
+    }
 }
